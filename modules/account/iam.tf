@@ -25,3 +25,35 @@ resource "aws_iam_role_policy_attachment" "appsync-policy" {
   role       = "${aws_iam_role.appsync.name}"
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
+
+# IAM policy - BillingAdmin
+data "aws_iam_policy_document" "billing_full_access" {
+  statement {
+    actions   = ["aws-portal:*"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "billing_full_access" {
+  name   = "BillingFullAccess"
+  policy = "${data.aws_iam_policy_document.billing_full_access}"
+}
+
+# IAM policy - BillingReviewer
+data "aws_iam_policy_document" "billing_view_access" {
+  statement {
+    actions = [
+      "aws-portal:ViewPaymentMethods",
+      "aws-portal:ViewAccount",
+      "aws-portal:ViewBilling",
+      "aws-portal:ViewUsage",
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "billing_view_access" {
+  name   = "BillingViewAccess"
+  policy = "${data.aws_iam_policy_document.billing_view_access}"
+}
