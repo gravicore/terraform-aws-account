@@ -10,6 +10,15 @@ variable "tags" {
   }
 }
 
+variable allow_gravicore_access {
+  description = "Flag to establish SAML connectivity for Gravicore managed services"
+  default     = false
+}
+
+variable trusted_entity_account_id {
+  description = "Account ID of the trusted entity"
+}
+
 variable "aws_region" {
   description = "The region where resources will be deployed"
   default     = "us-east-1"

@@ -26,13 +26,11 @@ data "aws_iam_policy_document" "vpc_flow_logging" {
 resource "aws_iam_role" "logging" {
   name        = "${var.name_prefix}-logging"
   description = "Role for logging resources"
-
   assume_role_policy = "${data.aws_iam_policy_document.vpc_flow_logging.json}"
 }
 
 resource "aws_iam_role_policy" "logging" {
   name = "${var.name_prefix}-logging"
   role = "${aws_iam_role.logging.id}"
-
   policy = "${data.aws_iam_policy_document.logging.json}"
 }
