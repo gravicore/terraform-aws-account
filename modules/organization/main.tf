@@ -5,11 +5,9 @@ terraform {
 locals {
   name_prefix = "${join("-",
     list(
-      var.tags["Organization"],
-      var.tags["Application"],
+      var.tags["Namespace"],
       var.tags["Environment"],
-      var.tags["Container"],
-      var.tags["Component"]
+      var.tags["Stage"]
     )
   )}"
 }
