@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 0.11.7"
+  required_version = "~> 0.11.8"
 }
 
 module "gravicore_access" {
@@ -11,7 +11,8 @@ module "gravicore_access" {
 
 module "iam" {
   source = "./modules/iam"
-  tags = "${var.tags}"
+  tags   = "${var.tags}"
+
   allow_gravicore_access    = "${var.allow_gravicore_access}"
   trusted_entity_account_id = "${var.trusted_entity_account_id}"
 }
